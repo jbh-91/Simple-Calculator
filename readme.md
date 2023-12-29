@@ -68,7 +68,7 @@ End
 │   └── simple_gui.py
 └── tests/
     ├── __init__.py
-    └── test_tip_calculator.py
+    └── test_calculator.py
 ```
 
 ## Tests
