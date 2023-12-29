@@ -1,11 +1,11 @@
 # Project: Calculator with GUI
 
-This is a simple calculator with a GUI
+This is a simple calculator with a GUI using [PySimpleGui](https://www.pysimplegui.org/en/latest/)
 > **Goal:** GUI, calculations and call functions in order
 
 ## Task
 
-Create a Calculator
+Create a Calculator WITHOUT using eval() on the input
 
 ### Input
 
@@ -41,14 +41,20 @@ Create a Calculator
 TipCalculator
     Initialize calculator
     Initilaize GUI
+        buttons
+        text-field
 
-    Prompt for equation
-
-    Convert numbers to numbers (float)
-    Calculate operations in order while checking if operations are possible
+    Repeat
+        Get input
+        Update text-field
+    
+    On calculate
+        Split field-input to numbers and operations
+        Convert numbers to numbers (float)
+        Calculate operations in order while checking if operations are possible
     
     Feedback-Pop-Up on error if error
-    Display result or 
+    Display result
 End
 
 ```
