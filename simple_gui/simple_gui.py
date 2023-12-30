@@ -10,6 +10,10 @@ class CalcButton(sg.Button):
 
 prompt = ""
 
+####
+# GUI START
+####
+
 col1 = [
     [sg.Text(prompt, text_color="#000000", font = ("Arial", 14), background_color="#ffffff", size=(30, 2), key="-FIELD-")]
 ]
@@ -49,6 +53,10 @@ layout = [
 ]
 
 window = sg.Window("Simple Calculator", layout, size=(275, 440))
+
+####
+# GUI END
+####
 
 while True:
     event, values = window.read()
