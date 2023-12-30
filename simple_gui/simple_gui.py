@@ -1,40 +1,44 @@
 import PySimpleGUI as sg
 
-class FButton(sg.Button):
-    def __init__(self, *args):
-        super().__init__(*args, size=(3, 2))
+class NumButton(sg.Button):
+    def __init__(self, *args, size: tuple=(3, 2)):
+        super().__init__(*args, size=size)
 
+class CalcButton(sg.Button):
+    def __init__(self, *args, size: tuple=(3, 2), button_color="#1b2027"):
+        super().__init__(*args, size=size, button_color=button_color)
+
+prompt = ""
 
 col1 = [
-    [sg.Text(key="-FIELD-")]
+    [sg.Text(prompt, text_color="#000000", font = ("Arial", 14), background_color="#ffffff", size=(30, 2), key="-FIELD-")]
 ]
 
 col2 = [
-    [FButton("%"),FButton("CE"), FButton("C"), FButton("DEL")]
+    [CalcButton("DEL", size=(26,2), button_color="#ff2200")]
 ]
 
 col3 = [
-    [FButton("1/x"), FButton("x²"), FButton("√x"), FButton("/")]
+    [CalcButton("1/x"), CalcButton("x²"), CalcButton("√x"), CalcButton("/")]
 ]
 
 col4 = [
-    [FButton("7"), FButton("8"), FButton("9"), FButton("*")]
+    [NumButton("7"), NumButton("8"), NumButton("9"), CalcButton("*")]
 ]
 
 col5 = [
-    [FButton("4"), FButton("5"), FButton("6"), FButton("-")]
+    [NumButton("4"), NumButton("5"), NumButton("6"), CalcButton("-")]
 ]
 
 col6 = [
-    [FButton("1"), FButton("2"), FButton("3"), FButton("+")]
+    [NumButton("1"), NumButton("2"), NumButton("3"), CalcButton("+")]
 ]
 
 col7 = [
-    [FButton("+/-"), FButton("0"), FButton("."), FButton("=")]
+    [CalcButton("."), NumButton("0"), CalcButton("=", size=(11,2), button_color="#ff2200")]
 ]
 
 layout = [
-    [sg.Text(background_color='#ffffff', size=(30, 3))],
     [sg.Column(col1)],
     [sg.Column(col2)],
     [sg.Column(col3)],
@@ -44,17 +48,22 @@ layout = [
     [sg.Column(col7)]
 ]
 
-window = sg.Window('Simple Calculator', layout, size=(275, 480))
-
+window = sg.Window("Simple Calculator", layout, size=(275, 440))
 
 while True:
     event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
-        break
 
-#    switch:
-#        
-#    case:
-#        
+    match event:
+        case sg.WIN_CLOSED:
+            break
+        case "=":
+            prompt = str(eval(prompt))  # only temporary 
+            window["-FIELD-"].update(prompt)
+        case "DEL":
+            prompt = ""
+            window["-FIELD-"].update(prompt)
+        case _: 
+            prompt = prompt + event
+            window["-FIELD-"].update(prompt)
 
 window.close()
