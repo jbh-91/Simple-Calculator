@@ -128,7 +128,7 @@ Expected result:
 Inputs:
   123.45 / 670.89
 Expected result:
-  0,1840093010776729
+  0.18400930107767294
 ```
 
 **Test-Plan: Exponentiation, potentiate (\*\*)**
