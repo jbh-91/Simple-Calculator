@@ -14,10 +14,6 @@ prompt = ""
 # GUI START
 ####
 
-####
-# Calculator GUI START
-#### 
-
 col1 = [
     [sg.Text(prompt, text_color="#000000", font = ("Arial", 14), background_color="#ffffff", size=(30, 2), key="-FIELD-")]
 ]
@@ -55,10 +51,6 @@ layout = [
     [sg.Column(col6)],
     [sg.Column(col7)]
 ]
-
-####
-# Calculator GUI END
-#### 
 
 window = sg.Window("Simple Calculator", layout, size=(275, 440))
 
