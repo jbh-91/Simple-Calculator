@@ -211,7 +211,7 @@ Expected result:
 Inputs:
   10 + 15 * (3 - 8) ** 5
 Expected result:
-  -46885
+  -46865
 ```
 
 ## Additional, optional Tasks

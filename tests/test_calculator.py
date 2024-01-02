@@ -56,7 +56,7 @@ class TestCalculatorMethods(unittest.TestCase):
     def test_operations_hirarchy(self):
         # PEMDAS: Parentheses, Exponents, Multiplication/Division,
         #         Addition/Subtraction from left to right.
-        pass
+        self.assertEqual(self.tc.calculate("10 + 15 * (3 - 8) ** 5"), -46865, "order of operation is violated")
 
 
 if __name__ == "__name__":
