@@ -51,12 +51,33 @@ class TestCalculatorMethods(unittest.TestCase):
 
     def test_division_by_zero_caught(self):
         # TODO: rework with asserRaise or something
-        self.assertEqual(self.tc.validate("10 / 0 "), "<class 'ZeroDivisionError'>: division by zero!")
+        self.assertEqual(self.tc.validate_input("10 / 0 "), "<class 'ZeroDivisionError'>: division by zero!")
 
     def test_operations_hirarchy(self):
         # PEMDAS: Parentheses, Exponents, Multiplication/Division,
         #         Addition/Subtraction from left to right.
         self.assertEqual(self.tc.calculate("10 + 15 * (3 - 8) ** 5"), -46865, "order of operation is violated")
+
+    def test_string_vaildation(self):
+        # validate_input() returns True if input is valid, otherwise it returns a string with an error-message
+        self.assertTrue(self.tc.parse_valid_input_to_list("10+0.23023--100*(15-5)**2"))
+        
+        # no letters allowed
+        self.assertIsInstance(self.tc.parse_valid_input_to_list("10/15a"), str)
+
+        # division by zero
+        self.assertIsInstance(self.tc.parse_valid_input_to_list("10/0"), str)
+        
+        # missing a pair of paranthesis
+        self.assertIsInstance(self.tc.parse_valid_input_to_list("10+0.23023--100*15-5)**2"), str)
+
+        # missing an operator between paranthesis and numbers
+        self.assertIsInstance(self.tc.parse_valid_input_to_list("10+0.23023(100*15-5)**2"), str)
+
+    def test_string_to_list_conversion(self):
+        self.assertEqual(self.tc.parse_valid_input_to_list("10+0.23023--100*(15-5)**2"),
+                         ['10', '+', '0.23023', '-', '-100', '*', '(', '15', '-', '5', ')', '**', '2'])
+        self.assertIsInstance(self.tc.parse_valid_input_to_list("10+0.23023--100*(15-5)**2"), list)
 
 
 if __name__ == "__name__":
