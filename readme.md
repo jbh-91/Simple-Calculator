@@ -93,7 +93,6 @@ End
 * Operations hirarchy (PEMDAS[^1])
   * Parentheses, Exponents, Multiplication/Division, Addition/Subtraction from left to right.
 * Input-string validation  
-* Input-string to list parsing  
 
 ### Assertion-Test: Operations (as float)
 
@@ -234,20 +233,6 @@ Expected result:
   Type = str
   Type = str
 ```
-
-### Assertion-Test: Input-string to list parsing
-
-**Test-Plan:**
-
-```text
-Inputs:
-  10+0.23023--100*(15-5)**2
-  10+0.23023--100*(15-5)**2
-Expected result:
-  ['10', '+', '0.23023', '-', '-100', '*', '(', '15', '-', '5', ')', '**', '2']
-  Type = list
-```
-
 
 ## Additional, optional Tasks
 

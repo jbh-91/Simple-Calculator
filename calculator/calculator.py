@@ -2,11 +2,13 @@
 TODO: Docstring
 """
 
+from icecream import ic
+
 class Calculator():
 
     def __init__(self) -> None:
-        self.allowed_digits = ["0", "1", "2", "3", "4", "5", "6", "7", "9", "0", "."]
-        self.allowed_operators = ["+", "-", "*", "/"]
+        self.allowed_digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."]
+        self.ordered_operators = ["^", "*", "/", "+", "-"]
         self.allowed_paranthesis = ["(", ")"]
 
 
@@ -32,51 +34,85 @@ class Calculator():
         except SyntaxError:
             return f"{SyntaxError}: missing pair in paranthesis!"
         
-    
-    def parse_valid_input_to_list(self, validated_str: str) -> list:
+
+    def calculate(self, expression: str) -> float:
         """
-        Converts a validated string and returns a list of numbers, operations and paranthesis
-        Requires valid input-string:
-            - no division by zero
-            - Needs an operator between numbers and aparanthesis
-            - every paranthesis requries a open/closing-pair
+        Calculates the operation and returns the solution as a float.
+        Requires valid string as input
         """
 
-        str_to_parse = validated_str
+        expression: str = expression.replace("**", "^") + "+"  # Required for last iteration
 
-        operation = []
+        number: float = 0
+        sign: str = "+" 
+        stack: list = []
 
-        operation.append(validated_str[0])
-
-        for el in validated_str[1::]:
-            # After the first loop, operations[-1] would be two characters long and therefore not in self.allowed_digits
-            # Thus it is required to look for the last character in the last list-element
-            if el in self.allowed_digits and operation[-1][-1] in self.allowed_digits: 
-                operation[-1] = operation[-1] + el
-
-            # "-" (minus) is allowed after another operation and before an allowed_digit
-            elif el in self.allowed_digits and operation[-1] == "-" and operation[-2] in self.allowed_operators:
-                operation[-1] = operation[-1] + el
-
-            # "*" is required for **
-            elif el == "*" and operation[-1] == "*":
-                operation[-1] = operation[-1] + el
-
-            else:
-                operation.append(el)
-
-        return operation
+        memory_index: int = None
 
 
-    def calculate(self, operation: list) -> float:
-        """
-        Calculates the operation and returns the result as a float.
-        Requires parsed input as a list 
-        """
-        return eval(operation) # temporary to set up tests
+        for index, current in enumerate(expression):
+            #ic(current, number, sign, stack)
+            # Numbers of type float or int
+            if current in self.allowed_digits: 
+                if memory_index == None:
+                    if expression[index + 1] in self.allowed_digits:
+                        memory_index = index
+                    else: 
+                        number = float(current)
+                elif expression[index + 1] not in self.allowed_digits:
+                    number = float(expression[memory_index:index + 1])
+                    memory_index = None
+                else:
+                    continue
+            
+            # Handling opening parantheses with a stack
+            if current == "(":
+                stack.append(sign)
+                stack.append("(")
+                sign = "+"
+            
+            # Operations
+            if current in self.ordered_operators or current == ")" or index == len(expression) - 1:
+                if sign == "+":
+                    stack.append(number)
+                elif sign == "-":
+                    stack.append(-number)
+                elif sign == "*":
+                    stack.append(stack.pop() * number)
+                elif sign == "^":
+                    stack.append(stack.pop() ** number)
+                elif sign == "/":
+                    stack.append(stack.pop() / number)
+
+                if current == ")":
+                    number = 0
+                    element = stack.pop()
+                    while element != "(":
+                        number += element
+                        element = stack.pop()
+                    sign = stack.pop()
+                else:
+                    number = 0
+                    sign = current
+
+        else:
+            solution = sum(stack)
+            return solution
     
 
 
 if __name__ == "__main__":
     calc = Calculator()
-    print(calc.parse_valid_input_to_list("10+0.23023--100*(15-5)**2"))
+    #print(calc.calculate("2+5"))
+    #print(calc.calculate("4*(3+2)"), "=? 20")
+    #print(calc.calculate("4*(3+-2)"))
+    #print(calc.calculate("4**2"))
+    print(calc.calculate("10*(2+5)"), "=? 70")
+    print(calc.calculate("10*(2+5)--100"), "=? -30")
+    print(calc.calculate("-100*(15-5)"), "=? -1000")
+    print(calc.calculate("(10*(2+5)--100*(15-5))"), "=? -930")
+    print(calc.calculate("(10*(2+5)--100*(15-5))**2"), "=? 864900")
+    print(calc.calculate("4**(1/2)"), "=? 2")
+    print(calc.calculate("10+15*(3-8)**5"), "=? -46865") # Somethings wrong with potentiation and * before and after a paranthesis **
+
+    # TODO: ** and ^ are treated in same order as every other operator; Stack looks back, potentiation needs to look forward
