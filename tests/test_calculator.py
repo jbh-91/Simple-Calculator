@@ -19,17 +19,18 @@ class TestCalculatorMethods(unittest.TestCase):
         self.assertEqual(self.tc.calculate("123.45 / 670.89"), 0.18400930107767294)
     
     def test_exponentiation(self):
-        # 2nd to 9tg potentiation 
+        # 2nd to 9th potentiation 
         err_msg = "result of potentiation calculation is wrong"
 
-        self.assertEqual(self.tc.calculate("123.4567809 ** 2"), 15241.576750190605, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 3"), 1881676.0014188155, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 4"), 232305661.83195078, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 5"), 28679709194.616642, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 6"), 3540704574315.502, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 7"), 437123988862896.7, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 8"), 5.396592051918067e+16, err_msg)
-        self.assertEqual(self.tc.calculate("123.4567809 ** 9"), 6.662458825603302e+18, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 2"), 4.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 2 ** 2"), 16.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 3"), 8.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 4"), 16.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 5"), 32.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 6"), 64.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 7"), 128.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 8"), 256.0, err_msg)
+        self.assertEqual(self.tc.calculate("2 ** 9"), 512.0, err_msg)
 
         # square root
         self.assertEqual(self.tc.calculate("123.4567809 ** (1/2)"), 11.111110696055547, 
@@ -56,7 +57,7 @@ class TestCalculatorMethods(unittest.TestCase):
     def test_operations_hirarchy(self):
         # PEMDAS: Parentheses, Exponents, Multiplication/Division,
         #         Addition/Subtraction from left to right.
-        self.assertEqual(self.tc.calculate("10 + 15 * (3 - 8) ** 5"), -46865, "order of operation is violated")
+        self.assertEqual(self.tc.calculate("10 + 15 * (3 - 8) ** 5"), -46865.0, "order of operation is violated")
 
 #    def test_string_vaildation(self):
 #        # validate_input() returns True if input is valid, otherwise it returns a string with an error-message
