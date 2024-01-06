@@ -18,12 +18,11 @@ class TestCalculatorMethods(unittest.TestCase):
     def test_division(self):
         self.assertEqual(self.tc.calculate("123.45 / 670.89"), 0.18400930107767294)
     
-    def test_exponentiation(self):
+    def test_exponentiation_power(self):
         # 2nd to 9th potentiation 
         err_msg = "result of potentiation calculation is wrong"
 
         self.assertEqual(self.tc.calculate("2 ** 2"), 4.0, err_msg)
-        self.assertEqual(self.tc.calculate("2 ** 2 ** 2"), 16.0, err_msg)
         self.assertEqual(self.tc.calculate("2 ** 3"), 8.0, err_msg)
         self.assertEqual(self.tc.calculate("2 ** 4"), 16.0, err_msg)
         self.assertEqual(self.tc.calculate("2 ** 5"), 32.0, err_msg)
@@ -31,6 +30,12 @@ class TestCalculatorMethods(unittest.TestCase):
         self.assertEqual(self.tc.calculate("2 ** 7"), 128.0, err_msg)
         self.assertEqual(self.tc.calculate("2 ** 8"), 256.0, err_msg)
         self.assertEqual(self.tc.calculate("2 ** 9"), 512.0, err_msg)
+
+    def test_exponentiation_consecutive_power(self):
+        self.assertEqual(self.tc.calculate("2 ** 2 ** 2"), 16.0,
+                         "result of consecutive potentiation calculation is wrong")
+
+    def test_exponentiation_roots(self):
 
         # square root
         self.assertEqual(self.tc.calculate("123.4567809 ** (1/2)"), 11.111110696055547, 
@@ -49,6 +54,8 @@ class TestCalculatorMethods(unittest.TestCase):
         self.assertEqual(self.tc.calculate("123.4567809 ** (1/7)"), 1.9897011447521342, err_msg)
         self.assertEqual(self.tc.calculate("123.4567809 ** (1/8)"), 1.8257418413004063, err_msg)
         self.assertEqual(self.tc.calculate("123.4567809 ** (1/9)"), 1.7076173150528808, err_msg)
+
+
 
     def test_division_by_zero_caught(self):
         # TODO: rework with asserRaise or something
