@@ -28,7 +28,7 @@ class Calculator():
         """
         Validates an input string if it can be calculated.\n
 
-        Returns either 0 as valid or the first error in the following order:\n
+        Returns an integer of either 0 as valid or the first error in the following order:\n
         \t0: valid input\n
         \t1: valid input - division by zero\n
         \t2: valid input - missing pair in paranthesis\n
