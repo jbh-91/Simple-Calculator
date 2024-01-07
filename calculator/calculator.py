@@ -55,7 +55,6 @@ class Calculator():
 
 
         for index, current in enumerate(expression):
-            #ic(current, number, sign, stack)
             # Numbers of type float or int
             if current in self.allowed_digits: 
                 if memory_index == None:
@@ -69,11 +68,13 @@ class Calculator():
                 else:
                     continue
             
+
             # Handling opening parantheses with a stack
             if current == "(":
                 stack.append(sign)
                 stack.append("(")
                 sign = "+"
+
 
             # Operation: Handle potentiation with higher precedence
             if current == "^":
@@ -86,6 +87,7 @@ class Calculator():
 
                 continue
 
+
             # Operation: Execute potentiation after "^" was current
             if sign == "^":
                     last_stack_number = stack.pop()
@@ -94,18 +96,21 @@ class Calculator():
                     power = last_stack_number ** number
 
                     if last_stack_sign == "+":
-                        stack.append(power)
+                        number = power
                     elif last_stack_sign == "-":
-                        stack.append(-power)
+                        number = -power
                     elif last_stack_sign == "*":
-                        stack.append(stack.pop() * power)
+                        number = stack.pop() * power
                     elif last_stack_sign == "/":
-                        stack.append(stack.pop() / power)
-                    
-                    number = 0
-                    sign = current
-                    
-            
+                        number = stack.pop() / power
+                    elif last_stack_sign == "^":
+                        number = power
+                    else:
+                        number = 0
+
+                    sign = "+"
+
+
             # Operation: + - * /
             if current in "*/+-" or current == ")" or index == len(expression) - 1:
                 if sign == "+":
@@ -135,4 +140,4 @@ class Calculator():
 
 if __name__ == "__main__":
     tc = Calculator()
-    ic(tc.calculate("2**2**2")) # TODO: Fix double potentiation
+    ic(tc.calculate("2**3**4")) # TODO: Fix double potentiation
