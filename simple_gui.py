@@ -9,11 +9,22 @@ class CalcButton(sg.Button):
     def __init__(self, *args, size: tuple=(3, 2), button_color="#1b2027"):
         super().__init__(*args, size=size, button_color=button_color)
 
+def validate_prompt(prompt_to_validate: str) -> bool | str:
+    prompt_error = calc.validate_input(prompt_to_validate)
+
+    if prompt_error == 0:
+        return True
+    elif prompt_error == 1:
+        return f"Invalid input:\nPlease fix - division by zero!"
+    elif prompt_error == 2:
+        return f"Invalid input:\nPlease fix - missing pair in paranthesis!"
+    # Error 3 not relevant since letters can't be input
+    elif prompt_error == 4:
+        return f"Invalid input:\nPlease fix - missing an operator between numbers and parenthesis!"
+
 calc = calc.Calculator()
 
 prompt = ""
-operators = "()*/-+"
-digits = "0123456789."
 
 ####
 # GUI START
@@ -80,8 +91,13 @@ while True:
 
         # Resolve expression
         case "=":
-            result = calc.calculate(prompt)
-            prompt = str(result)
+            feedback = validate_prompt(prompt)
+            if feedback is True:
+                result = calc.calculate(prompt)
+                prompt = str(result)
+            else:
+                sg.popup_error(feedback, title="Input invalid")
+                
             window["-FIELD-"].update(prompt)
 
         # square exponent

@@ -56,31 +56,26 @@ class TestCalculatorMethods(unittest.TestCase):
         self.assertEqual(self.tc.calculate("123.4567809 ** (1/9)"), 1.7076173150528808, err_msg)
 
 
-
-    def test_division_by_zero_caught(self):
-        # TODO: rework with asserRaise or something
-        self.assertEqual(self.tc.validate_input("10 / 0 "), "<class 'ZeroDivisionError'>: division by zero!")
-
     def test_operations_hirarchy(self):
         # PEMDAS: Parentheses, Exponents, Multiplication/Division,
         #         Addition/Subtraction from left to right.
         self.assertEqual(self.tc.calculate("10 + 15 * (3 - 8) ** 5"), -46865.0, "order of operation is violated")
 
-#    def test_string_vaildation(self):
-#        # validate_input() returns True if input is valid, otherwise it returns a string with an error-message
-#        self.assertTrue(self.tc.validate_input("10+0.23023--100*(15-5)**2"))
-#        
-#        # no letters allowed
-#        self.assertIsInstance(self.tc.validate_input("10/15a"), str)
-#
-#        # division by zero
-#        self.assertIsInstance(self.tc.validate_input("10/0"), str)
-#        
-#        # missing a pair of paranthesis
-#        self.assertIsInstance(self.tc.validate_input("10+0.23023--100*15-5)**2"), str)
-#
-#        # missing an operator between paranthesis and numbers
-#        self.assertIsInstance(self.tc.validate_input("10+0.23023(100*15-5)**2"), str)
+    def test_string_vaildation(self):
+        # validate_input() returns True if input is valid, otherwise it returns a list of exceptions
+        self.assertEqual(self.tc.validate_input("10+0.23023--100*(15-5)**2"), 0)
+        
+        # division by zero
+        self.assertEqual(self.tc.validate_input("10/0"), 1)
+        
+        # missing a pair of paranthesis
+        self.assertEqual(self.tc.validate_input("10+0.23023--100*15-5)**2"), 2)
+
+        # no letters allowed
+        self.assertEqual(self.tc.validate_input("10/15a"), 3)
+
+        # missing an operator between paranthesis and numbers
+        self.assertEqual(self.tc.validate_input("10+0.23023(100*15-5)**2"), 4)
 
 
 if __name__ == "__name__":

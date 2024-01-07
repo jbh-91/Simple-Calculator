@@ -14,34 +14,38 @@ History of this module
     * Expanding onto that with potentiation and thus adding a higher order of execution
 """
 
+
 from icecream import ic
+import re
+from string import ascii_letters
 
 class Calculator():
 
     def __init__(self) -> None:
         self.allowed_digits: str = "0123456789."
 
-    def validate_input(self, str_to_validate: str) -> bool | str:
+    def validate_input(self, str_to_validate: str) -> int:
         """
-        Validates an input string if it can be calculated.
-        Returns True if the string is valid.
-        Returns a string with an error message if string is invalid
+        Validates an input string if it can be calculated.\n
+
+        Returns either 0 as valid or the first error in the following order:\n
+        \t0: valid input\n
+        \t1: valid input - division by zero\n
+        \t2: valid input - missing pair in paranthesis\n
+        \t3: valid input - used letters\n
+        \t4: valid input - missing an operator between numbers and parenthesis\n
         """
 
-        if not str_to_validate.count("(") == str_to_validate.count(")"):
-            return "Input invalid - missing pair in parenthesis!"
-        
-        # TODO: Lookup best practices and rework
-        try:
-            eval(str_to_validate)
-        except ZeroDivisionError:
-            return f"Input invalid - division by zero!"
-        except NameError:
-            return f"Input invalid - no letters allowed!"
-        except TypeError:
-            return f"Input invalid - missing an operator between numbers and parenthesis!"
-        except SyntaxError:
-            return f"Input invalid - missing pair in paranthesis!"
+        if re.search("([\d]+/0[()/*-+])|([\d]+/0\Z)", str_to_validate):
+            return 1
+        elif not str_to_validate.count("(") == str_to_validate.count(")"):
+            return 2
+        elif re.search("[a-zA-Z]+", str_to_validate):
+            return 3
+        elif re.search("[0-9]+\(|\)[0-9]+", str_to_validate):
+            return 4
+        else:
+            return 0
 
 
     def calculate(self, expression: str) -> float | int:
@@ -153,5 +157,10 @@ class Calculator():
 
 
 if __name__ == "__main__":
-    tc = Calculator()
-    ic(tc.calculate("2**3**4")) # TODO: Fix double potentiation
+    pass
+    #tc = Calculator()
+    #ic(tc.validate_input("10+0.23023--100*(15-5)**2"))
+    #ic(tc.validate_input("10/15a"))
+    #ic(tc.validate_input("10/0"))
+    #ic(tc.validate_input("10+0.23023--100*15-5)**2"))
+    #ic(tc.validate_input("10+0.23023(100*15-5)**2"))
