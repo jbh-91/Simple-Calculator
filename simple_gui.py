@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import calculator.calculator as calc
 
 class NumButton(sg.Button):
     def __init__(self, *args, size: tuple=(3, 2)):
@@ -8,7 +9,11 @@ class CalcButton(sg.Button):
     def __init__(self, *args, size: tuple=(3, 2), button_color="#1b2027"):
         super().__init__(*args, size=size, button_color=button_color)
 
+calc = calc.Calculator()
+
 prompt = ""
+operators = "()*/-+"
+digits = "0123456789."
 
 ####
 # GUI START
@@ -19,11 +24,11 @@ col1 = [
 ]
 
 col2 = [
-    [CalcButton("DEL", size=(26,2), button_color="#ff2200")]
+    [CalcButton("("), CalcButton(")"), CalcButton("←", button_color="#882200"), CalcButton("DEL", button_color="#ff2200")]
 ]
 
 col3 = [
-    [CalcButton("1/x"), CalcButton("x²"), CalcButton("√x"), CalcButton("/")]
+    [CalcButton("x²"), CalcButton(f"x**n"), CalcButton("n√x"), CalcButton("/")]
 ]
 
 col4 = [
@@ -64,12 +69,39 @@ while True:
     match event:
         case sg.WIN_CLOSED:
             break
-        case "=":
-            prompt = str(eval(prompt))  # only temporary 
-            window["-FIELD-"].update(prompt)
+        
+        # Deletion and Backspace
         case "DEL":
             prompt = ""
             window["-FIELD-"].update(prompt)
+        case "←":
+            prompt = prompt[0:-1]
+            window["-FIELD-"].update(prompt)
+
+        # Resolve expression
+        case "=":
+            result = calc.calculate(prompt)
+            prompt = str(result)
+            window["-FIELD-"].update(prompt)
+
+        # square exponent
+        case "x²":
+            prompt = prompt + "**2"
+            window["-FIELD-"].update(prompt)
+
+        # nth exponent
+        case "x**n":
+            n = sg.popup_get_text("Please enter the nth exponent: ", title="Potentiation")
+            prompt = prompt + f"**{n}"
+            window["-FIELD-"].update(prompt)
+
+        # radicals / roots
+        case "n√x":
+            n = sg.popup_get_text("Please enter the nth root: ", title="Radical")
+            prompt = prompt + f"**(1/{n})"
+            window["-FIELD-"].update(prompt)
+        
+        # Use Buttontext as input
         case _: 
             prompt = prompt + event
             window["-FIELD-"].update(prompt)

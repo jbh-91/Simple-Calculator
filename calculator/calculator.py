@@ -19,7 +19,7 @@ from icecream import ic
 class Calculator():
 
     def __init__(self) -> None:
-        self.allowed_digits = "0123456789."
+        self.allowed_digits: str = "0123456789."
 
     def validate_input(self, str_to_validate: str) -> bool | str:
         """
@@ -44,7 +44,7 @@ class Calculator():
             return f"{SyntaxError}: missing pair in paranthesis!"
 
 
-    def calculate(self, expression: str) -> float:
+    def calculate(self, expression: str) -> float | int:
         """
         Calculates the operation and returns the solution as a float.
         Requires valid string as input.
@@ -147,6 +147,8 @@ class Calculator():
 
         else:
             solution = sum(stack)
+            if solution // 1 == solution:
+                solution = int(solution)
             return solution
 
 

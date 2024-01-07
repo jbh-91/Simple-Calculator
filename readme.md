@@ -66,12 +66,10 @@ End
 ├── .gitignore
 ├── readme.md
 ├── requirements.txt
+├── simple_gui.py
 ├── calculator
 │   ├── __init__.py
 │   └── calculator.py
-├── simple_gui
-│   ├── __init__.py
-│   └── simple_gui.py
 └── tests/
     ├── __init__.py
     └── test_calculator.py
