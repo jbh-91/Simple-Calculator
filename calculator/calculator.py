@@ -1,5 +1,17 @@
-"""
-TODO: Docstring
+"""Simple Calculator
+
+This module contains the class Calculator(), which is a simple tool to validate and calculate an input string and return the result as a float.
+
+Personal learning-goals of the auther:
+* How to validate input using exceptions
+* How to handle order of execution, including parentheses, potentiation and multiplication 
+* How to use the VSCode debugger
+* Get more used to writing tests
+
+History of this module
+* Initially created a custom calculator 
+* Switched to using a stack to add parentheses funcionality, analog to https://algodaily.com/challenges/build-a-calculator/python 
+    * Expending onto that with potentiation and thus adding a higher order of execution
 """
 
 from icecream import ic
