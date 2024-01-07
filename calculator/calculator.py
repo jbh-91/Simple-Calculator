@@ -2,16 +2,16 @@
 
 This module contains the class Calculator(), which is a simple tool to validate and calculate an input string and return the result as a float.
 
-Personal learning-goals of the auther:
+Personal learning goals of the author:
 * How to validate input using exceptions
-* How to handle order of execution, including parentheses, potentiation and multiplication 
+* How to handle the order of execution, including parentheses, potentiation, and multiplication 
 * How to use the VSCode debugger
 * Get more used to writing tests
 
 History of this module
 * Initially created a custom calculator 
-* Switched to using a stack to add parentheses funcionality, analog to https://algodaily.com/challenges/build-a-calculator/python 
-    * Expending onto that with potentiation and thus adding a higher order of execution
+* Switched to using a stack to add parentheses functionality, analog to https://algodaily.com/challenges/build-a-calculator/python 
+    * Expanding onto that with potentiation and thus adding a higher order of execution
 """
 
 from icecream import ic
@@ -23,15 +23,15 @@ class Calculator():
 
     def validate_input(self, str_to_validate: str) -> bool | str:
         """
-        Validates an input-string if it can be calculated.
+        Validates an input string if it can be calculated.
         Returns True if the string is valid.
-        Returns a string with an error-message if string is invalid
+        Returns a string with an error message if string is invalid
         """
 
         if not str_to_validate.count("(") == str_to_validate.count(")"):
-            return "Input invalid - missing pair in parantesis!"
+            return "Input invalid - missing pair in parenthesis!"
         
-        # TODO: Lookup best practice and rework
+        # TODO: Lookup best practices and rework
         try:
             eval(str_to_validate)
         except ZeroDivisionError:
@@ -39,7 +39,7 @@ class Calculator():
         except NameError:
             return f"{TypeError}: no letters allowed"
         except TypeError:
-            return f"{TypeError}: missing an operator between numbers and parantesis!"
+            return f"{TypeError}: missing an operator between numbers and parenthesis!"
         except SyntaxError:
             return f"{SyntaxError}: missing pair in paranthesis!"
 
