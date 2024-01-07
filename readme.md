@@ -13,13 +13,13 @@ Create a Calculator WITHOUT using eval() on the input
   * numbers
   * operations
     * Addition (+)
-    * Substraction (-)
+    * Subtraction (-)
     * Multiplication (*)
     * Division (/)
     * Exponentiation
       * potentiation (**)
       * square root (sqrt())
-      * qubic root (**(1./3.))
+      * cubic root (**(1./3.))
       * x root (**(1./x.))
   * minus sign (-)
   * float point
@@ -40,7 +40,7 @@ Create a Calculator WITHOUT using eval() on the input
 ```text
 TipCalculator
     Initialize calculator
-    Initilaize GUI
+    Initialize GUI
         buttons
         text-field
 
@@ -49,11 +49,11 @@ TipCalculator
         Update text-field
     
     On calculate
-        Split field-input to numbers and operations
+        Split field input to numbers and operations
         Convert numbers to numbers (float)
         Calculate operations in order while checking if operations are possible
     
-    Feedback-Pop-Up on error if error
+    Feedback-Pop-Up on error if there is an error
     Display result
 End
 
@@ -79,17 +79,17 @@ End
 
 * Operations (as float)
   * Addition (+)
-  * Substraction (-)
+  * Subtraction (-)
   * Multiplication (*)
   * Division (/)
   * Exponentiation
     * potentiation (x**y)
     * consecutive potentiation (x\*\*y\*\*z)
     * square root (sqrt(x))
-    * qubic root (x**(1/3))
+    * cubic root (x**(1/3))
     * xth root (y**(1/x))
 * Division by 0
-* Operations hirarchy (PEMDAS[^1])
+* Operations hierarchy (PEMDAS[^1])
   * Parentheses, Exponentiation, Multiplication/Division, Addition/Subtraction from left to right.
 * Input-string validation  
 
@@ -212,7 +212,7 @@ Expected result:
   ZeroDivisionError
 ```
 
-### Assertion-Test: Operations hirarchy (PEMDAS)
+### Assertion-Test: Operations hierarchy (PEMDAS)
 
 **Test-Plan:**
 
@@ -244,8 +244,8 @@ Expected result:
 
 ## Additional, optional Tasks
 
-* Add brackets/paranthethes functionality
+* Add brackets/parentheses functionality
 * Add scientific calculations
-* Display thousand-sepeartor on input "1,000,000.00"
+* Display thousand-separator on input "1,000,000.00"
 
 [^1]: [Order of operations](https://en.wikipedia.org/wiki/Order_of_operations) from *Ali Rahman, Ernna Sukinnah; Shahrill, Masitah; Abbas, Nor Arifahwati*; Tan, Abby (Summer 2017) [2016-08-29, 2017-03-06]. "Developing Students' Mathematical Skills Involving Order of Operations" ([:link: PDF](https://files.eric.ed.gov/fulltext/EJ1148460.pdf)). *International Journal of Research in Education and Science (IJRES)*. University of Brunei Darussalam. 3 (2): 373–382. [doi:10.21890/ijres.327896](https://doi.org/10.21890%2Fijres.327896). [ISSN 2148-9955](https://www.worldcat.org/issn/2148-9955).
