@@ -35,13 +35,13 @@ class Calculator():
         try:
             eval(str_to_validate)
         except ZeroDivisionError:
-            return f"{ZeroDivisionError}: division by zero!"
+            return f"Input invalid - division by zero!"
         except NameError:
-            return f"{TypeError}: no letters allowed"
+            return f"Input invalid - no letters allowed!"
         except TypeError:
-            return f"{TypeError}: missing an operator between numbers and parenthesis!"
+            return f"Input invalid - missing an operator between numbers and parenthesis!"
         except SyntaxError:
-            return f"{SyntaxError}: missing pair in paranthesis!"
+            return f"Input invalid - missing pair in paranthesis!"
 
 
     def calculate(self, expression: str) -> float | int:
