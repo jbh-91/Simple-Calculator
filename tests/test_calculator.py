@@ -68,19 +68,19 @@ class TestCalculatorMethods(unittest.TestCase):
 
 #    def test_string_vaildation(self):
 #        # validate_input() returns True if input is valid, otherwise it returns a string with an error-message
-#        self.assertTrue(self.tc.parse_valid_input_to_list("10+0.23023--100*(15-5)**2"))
+#        self.assertTrue(self.tc.validate_input("10+0.23023--100*(15-5)**2"))
 #        
 #        # no letters allowed
-#        self.assertIsInstance(self.tc.parse_valid_input_to_list("10/15a"), str)
+#        self.assertIsInstance(self.tc.validate_input("10/15a"), str)
 #
 #        # division by zero
-#        self.assertIsInstance(self.tc.parse_valid_input_to_list("10/0"), str)
+#        self.assertIsInstance(self.tc.validate_input("10/0"), str)
 #        
 #        # missing a pair of paranthesis
-#        self.assertIsInstance(self.tc.parse_valid_input_to_list("10+0.23023--100*15-5)**2"), str)
+#        self.assertIsInstance(self.tc.validate_input("10+0.23023--100*15-5)**2"), str)
 #
 #        # missing an operator between paranthesis and numbers
-#        self.assertIsInstance(self.tc.parse_valid_input_to_list("10+0.23023(100*15-5)**2"), str)
+#        self.assertIsInstance(self.tc.validate_input("10+0.23023(100*15-5)**2"), str)
 
 
 if __name__ == "__name__":

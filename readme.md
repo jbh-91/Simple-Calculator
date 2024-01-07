@@ -85,13 +85,14 @@ End
   * Multiplication (*)
   * Division (/)
   * Exponentiation
-    * potentiation (**)
-    * square root (sqrt())
-    * qubic root (**(1./3.))
-    * x root (**(1./x.))
+    * potentiation (x**y)
+    * consecutive potentiation (x\*\*y\*\*z)
+    * square root (sqrt(x))
+    * qubic root (x**(1/3))
+    * xth root (y**(1/x))
 * Division by 0
 * Operations hirarchy (PEMDAS[^1])
-  * Parentheses, Exponents, Multiplication/Division, Addition/Subtraction from left to right.
+  * Parentheses, Exponentiation, Multiplication/Division, Addition/Subtraction from left to right.
 * Input-string validation  
 
 ### Assertion-Test: Operations (as float)
@@ -132,30 +133,39 @@ Expected result:
   0.18400930107767294
 ```
 
-**Test-Plan: Exponentiation, potentiate (\*\*)**
+**Test-Plan: Exponentiation, potentiate (x\*\*y)**
 
 ```text
 Inputs:
-  123.4567809 ** 2
-  123.4567809 ** 3
-  123.4567809 ** 4
-  123.4567809 ** 5
-  123.4567809 ** 6
-  123.4567809 ** 7
-  123.4567809 ** 8
-  123.4567809 ** 9
+  2 ** 2
+  2 ** 3
+  2 ** 4
+  2 ** 5
+  2 ** 6
+  2 ** 7
+  2 ** 8
+  2 ** 9
 Expected result:
-  15241.576750190605
-  1881676.0014188155
-  232305661.83195078
-  28679709194.616642
-  3540704574315.502
-  437123988862896.7
-  5.396592051918067e+16
-  6.662458825603302e+18
+  4
+  8
+  16
+  32
+  64
+  128
+  256
+  512
 ```
 
-**Test-Plan: Exponentiation, square root (sqrt())**
+**Test-Plan: Exponentiation, consecutive potentiation (x\*\*y\*\*z)**
+
+```text
+Inputs:
+  2 ** 2 ** 2
+Expected result:
+  16
+```
+
+**Test-Plan: Exponentiation, square root (sqrt(x))**
 
 ```text
 Inputs:
@@ -164,7 +174,7 @@ Expected result:
   11.111110696055547
 ```
 
-**Test-Plan: Exponentiation, qubic root (\*\*(1./3.))**
+**Test-Plan: Exponentiation, qubic root (x\*\*(1/3))**
 
 ```text
 Inputs:
@@ -173,7 +183,7 @@ Expected result:
   4.979338483283606
 ```
 
-**Test-Plan: Exponentiation, x root (\*\*(1./x.))**
+**Test-Plan: Exponentiation, xth root (y\*\*(1/x))**
 
 ```text
 Inputs:
