@@ -86,7 +86,7 @@ class Calculator():
 
                 continue
 
-            # Operation: Execute potentiation in after "^" was current
+            # Operation: Execute potentiation after "^" was current
             if sign == "^":
                     last_stack_number = stack.pop()
                     last_stack_sign = stack.pop()
