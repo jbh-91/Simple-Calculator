@@ -18,7 +18,7 @@ def validate_prompt(prompt_to_validate: str) -> bool | str:
         return f"Invalid input:\nPlease fix - division by zero!"
     elif prompt_error == 2:
         return f"Invalid input:\nPlease fix - missing pair in paranthesis!"
-    # Error 3 not relevant since letters can't be input
+    # Error 3 not relevant since letters can't be input in gui
     elif prompt_error == 4:
         return f"Invalid input:\nPlease fix - missing an operator between numbers and parenthesis!"
 

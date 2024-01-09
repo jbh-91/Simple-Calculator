@@ -14,8 +14,6 @@ History of this module
     * Expanding onto that with potentiation and thus adding a higher order of execution
 """
 
-
-from icecream import ic
 import re
 from string import ascii_letters
 
@@ -154,13 +152,3 @@ class Calculator():
             if solution // 1 == solution:
                 solution = int(solution)
             return solution
-
-
-if __name__ == "__main__":
-    pass
-    #tc = Calculator()
-    #ic(tc.validate_input("10+0.23023--100*(15-5)**2"))
-    #ic(tc.validate_input("10/15a"))
-    #ic(tc.validate_input("10/0"))
-    #ic(tc.validate_input("10+0.23023--100*15-5)**2"))
-    #ic(tc.validate_input("10+0.23023(100*15-5)**2"))
